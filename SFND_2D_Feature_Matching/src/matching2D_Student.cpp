@@ -7,7 +7,7 @@ using namespace std;
 void matchDescriptors(std::vector<cv::KeyPoint> &kPtsSource, std::vector<cv::KeyPoint> &kPtsRef, cv::Mat &descSource, cv::Mat &descRef,std::vector<cv::DMatch> &matches, std::string descriptorType, std::string matcherType, std::string selectorType, double& timeToRun)
 {
     // configure matcher
-    bool crossCheck = false;
+    bool crossCheck = true;
     cv::Ptr<cv::DescriptorMatcher> matcher;
 
     if (matcherType.compare("MAT_BF") == 0)
