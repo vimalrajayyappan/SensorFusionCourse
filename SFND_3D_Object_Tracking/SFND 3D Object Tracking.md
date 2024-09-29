@@ -4,6 +4,29 @@ With the knowledge from previous project on Keypoint Detectors, Descirptors, Mat
 in this project by utilising those informations to perform 3D tracking on objects. This invloves `(1)detection of objects in camera frame using YOLO- Deep learning framework`, `(2)associating the objects between each frames based on keypoint matches and bounding box we have`, `(3)Compute Median Distance ratio on the Keypoint matches to find camera based
 TTC(Time TO COllision)`, and `(4)Clustering Lidar Points using bounding box between image frames to compute Lidar Only TTC`. Overall a great learning and yes its a lengthy course :D.
 
+## Running the Project
+- Run
+    ```
+    ./2D_Feature_Tracking
+    ```
+- The command window shows options for choosing Detectors. Choose options [0-6] and press enter
+    ```
+    [0:FAST, 1:BRISK, 2:ORB, 3:AKAZE, 4:SIFT, 5:HARRIS, 6:SHITOMASI]
+    ```
+- Next the command window shows options for choosing Descriptors. Choose options [0-5] and press enter
+    ```
+    [0:BRISK, 1:BRIEF, 2:ORB, 3:FREAK, 4:AKAZE, 5:SIFT]
+    ```
+- Next the command window shows options for choosing Matchers. Choose options [0-1] and press enter
+    ```
+    [0:MAT_BF, 1:MAT_FLANN]
+    ```
+    ```
+- Next the command window shows options for choosing Selectors. Choose options [0-1] and press enter
+    ```
+    [0:SEL_NN, 1:SEL_KNN]
+    ```
+
 Following are the rubric points 
 
 ## FP.1 Match 3D Objects:
