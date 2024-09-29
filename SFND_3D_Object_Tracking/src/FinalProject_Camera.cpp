@@ -22,13 +22,82 @@
 
 using namespace std;
 
+void DisplayVector(vector<double>& inp, std::string& out)
+{
+  out = "";
+  std::string comma = ",";
+  for (double num:inp)
+  {
+    std::string addThis = std::to_string(num);
+    out = out + addThis;
+    out = out + comma;
+  }
+  	
+}
 /* MAIN PROGRAM */
 int main(int argc, const char *argv[])
 {
     /* INIT VARIABLES AND DATA STRUCTURES */
-    string detectorType = "SHITOMASI";
-    string descriptorType = "BRISK";
+    string detectorType,descriptorType,inpMatcherType,inpSelType = "";
     double timeTaken =0;
+    std::vector<double> ttcLidarLst, ttcCameraLst;
+  
+    // string detSelected,desSelected,matSelected,selSelected = "";
+    string descriptorFormat = "DES_BINARY";
+     //User Options for Detector
+    string input ="";
+    // std::cout << "Enter input (Ctrl+C to quit): " << endl;
+    std::cout << "Type the index number of the Detector below to be tested: " << endl;
+    std::vector<std::string> detectorStrings = {"FAST", "BRISK", "ORB", "AKAZE", "SIFT", "HARRIS", "SHITOMASI"};
+    for(int i =0; i<detectorStrings.size() ; i++)
+    {
+        cout << i << " : "  << detectorStrings.at(i) <<endl;
+    }
+    std::getline(std::cin, input);
+    detectorType = detectorStrings.at(std::stod(input));
+    
+    std::cout << "Selected Detector : " + detectorType << endl;
+    cout << "" <<endl;
+
+    //Options for Descriptor
+    std::cout << "Type the index number of the Descriptor below to be tested: " << endl;
+    std::vector<std::string> descriptorStrings = {"BRISK", "BRIEF", "ORB", "FREAK", "AKAZE", "SIFT"};
+    for(int i =0; i<descriptorStrings.size() ; i++)
+    {
+        cout << i << " : "  << descriptorStrings.at(i) <<endl;
+    }
+    std::getline(std::cin, input);
+    descriptorType = descriptorStrings.at(std::stod(input));
+            
+    if(descriptorType == "SIFT")
+    {
+        descriptorFormat = "DES_HOG";
+    }
+    std::cout << "Selected Descriptor : " + descriptorType << endl;
+
+    //User options for MAtcher
+    std::cout << "Type the index number of the Matcher below to be tested: " << endl;
+    std::vector<std::string> matcherStrings = {"MAT_BF", "MAT_FLANN"};
+    for(int i =0; i<matcherStrings.size() ; i++)
+    {
+        cout << i << " : "  << matcherStrings.at(i) <<endl;
+    }
+    std::getline(std::cin, input);
+    inpMatcherType = matcherStrings.at(std::stod(input));
+
+    std::cout << "Selected Matcher : " + inpMatcherType << endl;
+    
+    //User Options for Selector
+    std::cout << "Type the index number of the Selector for Matcher below to be tested: " << endl;
+    std::vector<std::string> selectorStrings = {"SEL_NN", "SEL_KNN"};
+    for(int i =0; i<selectorStrings.size() ; i++)
+    {
+        cout << i << " : "  << selectorStrings.at(i) <<endl;
+    }
+    std::getline(std::cin, input);
+    inpSelType = selectorStrings.at(std::stod(input));
+
+    std::cout << "Selected Selector : " + inpSelType << endl;
 
     // data location
     string dataPath = "../";
@@ -132,7 +201,7 @@ int main(int argc, const char *argv[])
         clusterLidarWithROI((dataBuffer.end()-1)->boundingBoxes, (dataBuffer.end() - 1)->lidarPoints, shrinkFactor, P_rect_00, R_rect_00, RT);
 
         // Visualize 3D objects
-        bVis = true;
+        bVis = 0;
         if(bVis)
         {
             show3DObjects((dataBuffer.end()-1)->boundingBoxes, cv::Size(4.0, 20.0), cv::Size(2000, 2000), true);
@@ -246,9 +315,9 @@ int main(int argc, const char *argv[])
         {
             
             vector<cv::DMatch> matches;
-            string matcherType = "MAT_BF";        // MAT_BF, MAT_FLANN
-            string descriptorType = "DES_BINARY"; // DES_BINARY, DES_HOG
-            string selectorType = "SEL_NN";       // SEL_NN, SEL_KNN
+            string matcherType = inpMatcherType;//"MAT_BF";        // MAT_BF, MAT_FLANN
+            string descriptorType = descriptorFormat;//"DES_BINARY"; // DES_BINARY, DES_HOG
+            string selectorType = inpSelType; //"SEL_NN";       // SEL_NN, SEL_KNN
 
             matchDescriptors((dataBuffer.end() - 2)->keypoints, (dataBuffer.end() - 1)->keypoints,
                              (dataBuffer.end() - 2)->descriptors, (dataBuffer.end() - 1)->descriptors,
@@ -259,7 +328,7 @@ int main(int argc, const char *argv[])
 
             
 
-            bool bVis = false;
+            bool bVis = 1;
             if (bVis)
             {
                 cv::Mat matchImg = ((dataBuffer.end() - 1)->cameraImg).clone();
@@ -334,7 +403,10 @@ int main(int argc, const char *argv[])
                     computeTTCCamera((dataBuffer.end() - 2)->keypoints, (dataBuffer.end() - 1)->keypoints, currBB->kptMatches, sensorFrameRate, ttcCamera);
                     //// EOF STUDENT ASSIGNMENT
 
-                    bVis = true;
+                    ttcLidarLst.push_back(ttcLidar);
+                    ttcCameraLst.push_back(ttcCamera);
+
+                    bVis = 0;
                     if (bVis)
                     {
                         cv::Mat visImg = (dataBuffer.end() - 1)->cameraImg.clone();
@@ -359,6 +431,11 @@ int main(int argc, const char *argv[])
         }
 
     } // eof loop over all images
+    string outDisplay = "";
+    DisplayVector(ttcLidarLst,outDisplay);
+    std::cout << "DET: " << detectorType << " + " << "DES: "<< descriptorType << " LiDAR TTCs : " << outDisplay << std::endl;
+    DisplayVector(ttcCameraLst,outDisplay);
+    std::cout << "DET: " << detectorType << " + " << "DES: "<< descriptorType << " Camera TTCs : " << outDisplay << std::endl;
 
     return 0;
 }
