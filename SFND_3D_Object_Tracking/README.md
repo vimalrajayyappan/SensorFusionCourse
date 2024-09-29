@@ -74,5 +74,5 @@ that high and also considerably in the range compared to LiDAR and also on intut
 questionable. So I would choose *_[SHITOMASI + BRISK] or [SHITOMASI + ORB]_* combinations for TTC.
 
 
-## Final Output :
+## Final Output - [SHITOMASI + BRISK] :
 <img src="WriteupImages/AnimatedGIFS.gif" width="1200" height="300" />
