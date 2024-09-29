@@ -7,7 +7,7 @@ TTC(Time TO COllision)`, and `(4)Clustering Lidar Points using bounding box betw
 ## Running the Project
 - Run
     ```
-    ./2D_Feature_Tracking
+    ./3D_object_tracking
     ```
 - The command window shows options for choosing Detectors. Choose options [0-6] and press enter
     ```
@@ -21,13 +21,14 @@ TTC(Time TO COllision)`, and `(4)Clustering Lidar Points using bounding box betw
     ```
     [0:MAT_BF, 1:MAT_FLANN]
     ```
-    ```
 - Next the command window shows options for choosing Selectors. Choose options [0-1] and press enter
     ```
     [0:SEL_NN, 1:SEL_KNN]
     ```
 
-Following are the rubric points 
+I used MAT_BF and SEL_NN Selector combinations.
+
+Following shows how I achieved each rubric points.
 
 ## FP.1 Match 3D Objects:
 `matchBoundingBoxes()` method in `camFusion_Student.cpp` is implemented to associate bounding boxes based on keypoint matches between the frames. The logic involves choosing
