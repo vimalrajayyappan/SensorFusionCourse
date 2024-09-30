@@ -140,6 +140,8 @@ if(valid)
     double avgExecutionTime = 0;
     double totalTime = 0;
     std::vector<double> lstTimeTakenDET, lstTmTknDES,lsttmTknMatches, lstKeyPointsCount,lstNoOfMatches ;
+    int imgNos =  imgEndIndex - imgStartIndex;
+    double ngbhood_size = 0;
     for (size_t imgIndex = 0; imgIndex <= imgEndIndex - imgStartIndex; imgIndex++)
     {
         /* LOAD IMAGE INTO BUFFER */
@@ -213,13 +215,19 @@ if(valid)
         {
          
             vector<cv::KeyPoint> keypointFiltered;
+            double kptSizeSum = 0;
             for (auto &keypoint : keypoints)
             {
                 if (vehicleRect.contains(keypoint.pt))
                 {
                     keypointFiltered.push_back(keypoint);
+                    kptSizeSum += keypoint.size;
+
                 }
             }
+            
+            ngbhood_size += (kptSizeSum/keypointFiltered.size());
+
 
             keypoints = keypointFiltered;
             std::cout << "Filtered Keypoints Size : " + std::to_string(keypoints.size())<< std::endl;
@@ -342,6 +350,7 @@ if(valid)
     // DisplayVector(lsttmTknMatches,emptyString);
     // std::cout << "Time for Matching of each Pairs : " + emptyString << endl;
     cout << "Average Execution time for Detetction,Decription and Matching of selected option " + detSelected + "," + desSelected + "," + matSelected + "," + selSelected + "," + "is " + std::to_string(avgExecutionTime) + "ms"<< endl;
+    cout << "Average NieghborHood Size = " << ngbhood_size/imgNos << std::endl;
 //     return 0;
   }
   std::cout << "#################################################" << endl;
