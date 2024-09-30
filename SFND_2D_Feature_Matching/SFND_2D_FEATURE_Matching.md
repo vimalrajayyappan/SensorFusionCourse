@@ -1,6 +1,6 @@
 ## SFND  Camera 2D Feature Tracking
 
-SFND 2d Fetaure Tracking is the Mid-term Project in Udacity Sensor Fusion Nanodegree Course. The project deals with the following concepts 
+SFND 2D Fetaure Tracking is the Mid-term Project in Udacity Sensor Fusion Nanodegree Course. The project deals with the following concepts 
 discussed in the classroom.
 
 - KEYPOINT DETCTORS
@@ -67,7 +67,7 @@ is removed and the new images is pushed_back maintaining the buffer limit across
 
 ## MP 2 - Keypoint Detectors:
 There are totall 7 Detectors [0:FAST, 1:BRISK, 2:ORB, 3:AKAZE, 4:SIFT, 5:HARRIS, 6:SHITOMASI] implemeneted. While the SHITOMASI
-is already present and HARRIS is reused from classroom. The rest of the detector are implemented in `detKeypointsModern`, which 
+is already present and HARRIS is reused from classroom. The rest of the detectors are implemented in `detKeypointsModern`, which 
 utilizes OpenCV libraries for the same. The selection comes from user input while running the project
 
 ## MP 3 - Keypoint Removal:
@@ -89,18 +89,18 @@ Descriptor Distance Ratio is very efficient way of reducing false positives. The
 paper on SIFT. The idea is the best two match of keypoint in the source image is found in the reference image. With those two matches
 ratio of descriptor distance is computed and the threshold is set at 0.8. If its below the threshold then the first best match
 is stored , if its greater than the threshold, these two matches can be a potential false positives and can be skipped. Same is 
-implemented under KNN selector here.
+implemented under KNN selector here in `matchDescriptors` function.
 
 ## MP 7.1 - 
 The objective here is to count the number of keypoints for all 10 images, and to describe the distribution of points for each detector. 
 The follwoing is the graph, which shows number of points detected by each detector.
-<Graph>
-<Data>
+<img src="Results/KeyPointNumbers Vertical.PNG" width="1500" height="500" />
+<img src="Results/KeyPointNumbers Vertical.PNG" width="1500" height="500" />
 
 For neighbor_hood , I just averaged the [Keypoint size/Number of keypoints] for all images and the values are at th end.
 Following represents the graph of time taken by each detector.
-<time Graph>
 
+<img src="Results/KeypointsTime2.PNG" width="1500" height="500" />
 
 With these things in hand, I have the following observations:
 
@@ -108,7 +108,10 @@ With these things in hand, I have the following observations:
     Good number of keypoints defining vehicle edge [+0.8] Indicators are detected goofd[+1] . Rear window has quite a good numbers [+1] .
     Number plate is detected and one or two keypoints are identified. [+0.3]. Avg Running time - [0.6ms] which is impressive[+1] . 
     _My overall rating [4.1/5]_
-    <Fast image>
+    <img src="Results/Fast.PNG" width="1500" height="300" />
+
+    
+
 - ##### BRISK
     The vehicle edges are very well detected at different scale levels[+1] 
     and good numbers of keypoints in the rear window too[+1]. 
@@ -116,18 +119,22 @@ With these things in hand, I have the following observations:
     capture most keypoints. Number plates has ok keypoints [0.5]. Avg 
     Running Time 33ms. [+0.1] -
     _My rating 3.6/5_
+    <img src="Results/BRISK.PNG" width="1500" height="300" />
 
 
 - ##### ORB
-    The vehicle edges are being detected seems there are some spillovers to road [+0.7]. indicators has most number of keypoints in scales [+1] . Rear window also has a considerable keypoints [+0.7]. 
+    The vehicle edges are being detected seems there are some spillovers to road [+0.7]. indicators has most number of keypoints in scales [+1] . Rear window also has a considerable 
+    keypoints [+0.7]. 
     No keypoints on Number plate.Avg Running time 7ms - [+0.8] . 
     _My Rating : 3.2/5_
+    <img src="Results/ORB.PNG" width="1500" height="300" />
 
 - ##### AKAZE
     The vehicle edges are detected good [+1] , average key points on 
     rear window [+0.7], No Keypoints on Number plate . Indicators are 
     detected [+1]. Average Running Time : 201ms which way too high . 
     _My rating : [2.7/5]_
+    <img src="Results/AKAZE.PNG" width="1500" height="300" />
 
 
 - ##### SIFT
@@ -137,11 +144,13 @@ With these things in hand, I have the following observations:
     plate has less keypoints for this setting (+0.4) . Average Running 
     Time : 139ms which is high. 
     _My rating 2.5/5_
+    <img src="Results/SIFT.PNG" width="1500" height="300" />
 
 - ##### HARRIS
     Seems very less number of keypoints on edges [+0.2] and indicators are detected [+1]. Rear window has meagre keypoints [+0.2]. 
     Average Running Time (15 ms) - [+0.6] -
     _My rating 2/5_
+    <img src="Results/Harris.PNG" width="1500" height="300" />
 
 - ##### SHITOMASI
     Number plate has more number of keypoints (+1) compared to  
@@ -149,20 +158,23 @@ With these things in hand, I have the following observations:
     lights are also detected(+1). Overall Average Detector for the 
     current setting. Avg Running time (11ms) - (0.6) . 
     _My rating - [3.0/5]_
-
+    <img src="Results/Shitomasi.PNG" width="1500" height="300" />
+```
 So FAST scored good in terms of computation speed and keypoint detection, distribution followed by BRISK, ORB and SHITOMASI.
+```
 
 ## MP 7.2 
 The obejctive here is to count the number of all the keypoints with all detector-descriptor combinations for all 10 images.The BF approach is used for matching and also descriptor distance ratio in KNN selector is set to 0.8.
 Following are the table and graph which also shows the % of matched keypoints according to each detector-descriptor combinations.
-<Table>
-<Graph>
+<img src="Results/Fp2Eval.PNG" width="1500" height="500" />
+<img src="Results/Det-Des combo.PNG" width="1500" height="300" />
 
-As you can see, the marked cells in the sheet shows maximum percentage, simultaneously on less execution time.Though SHITOMASI's matching percentage are higher,  the detector time(11ms) is high compared to FAST(0.6ms).
+
+As you can see, the marked cells in the sheet shows maximum percentage, simultaneously on less execution time. Though SHITOMASI's matching percentage are higher,the detector time(11ms) is high compared to FAST(0.6ms). 
 
 
 ## MP 7.3
-With the graph of time of execution, and detection capabilities of all detector-descriptor combinations, it states clearly the winner is one that works with combination of FAST as it performs better in terms of computation time and overall picking very good features.
+With the graph of time of execution, and detection capabilities of all detector-descriptor combinations, it states clearly the winner is one that works with combination of FAST as it performs better in terms of computation time and overall picking very good features as seen in MP 7.1.
 
 On that way I will choose `FAST + BRIEF` and `FAST + ORB` as first two. On the third place 
 I was pondering, and I valued matches over time hence I choose `ORB+BRISK`. 
