@@ -95,7 +95,7 @@ implemented under KNN selector here in `matchDescriptors` function.
 The objective here is to count the number of keypoints for all 10 images, and to describe the distribution of points for each detector. 
 The follwoing is the graph, which shows number of points detected by each detector.
 <img src="Results/KeyPointNumbers Vertical.PNG" width="1500" height="500" />
-<img src="Results/KeyPointNumbers Vertical.PNG" width="1500" height="500" />
+<img src="Results/DataKeypointNumbers.PNG" width="1500" height="200" />
 
 For neighbor_hood , I just averaged the [Keypoint size/Number of keypoints] for all images and the values are at th end.
 Following represents the graph of time taken by each detector.
@@ -175,11 +175,20 @@ As you can see, the marked cells in the sheet shows maximum percentage, simultan
 
 ## MP 7.3
 With the graph of time of execution, and detection capabilities of all detector-descriptor combinations, it states clearly the winner is one that works with combination of FAST as it performs better in terms of computation time and overall picking very good features as seen in MP 7.1.
-
+<img src="Results/FinalResults.PNG" width="1500" height="500" />
 On that way I will choose `FAST + BRIEF` and `FAST + ORB` as first two. On the third place 
 I was pondering, and I valued matches over time hence I choose `ORB+BRISK`. 
 
 Needless to mention that `SHITOMASI` also works good with BRIEF and ORB, capturing high number of matches. But execution time takes a huge hit but comparatively better than rest of other combinations.
+
+Attached below are the GIFs of first two selections:
+## FAST + BRIEF
+<img src="Results/FAST_BRIEF.gif" width="1800" height="250" />
+
+
+## FAST + ORB
+<img src="Results/FAST_ORB.gif" width="1800" height="250" />
+
 
 
 
