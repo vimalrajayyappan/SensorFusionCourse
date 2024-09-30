@@ -1,3 +1,5 @@
+<img src="Results/FAST_BRIEF.gif" width="1800" height="250" />
+
 ## SFND  Camera 2D Feature Tracking
 
 SFND 2D Fetaure Tracking is the Mid-term Project in Udacity Sensor Fusion Nanodegree Course. The project deals with the following concepts 
