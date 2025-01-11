@@ -31,10 +31,11 @@ Next, the range and delay_time is simulated using motion equations as below.
 Using the time stamp and simulated delay time, the Tx and Rx are generated and mixing them both using Tx*.Rx gives us the beat signal , which will be utilised by RangeFFT or 1D-FFT for range measurements
 
 **3. Implement the Range FFT on the Beat or Mixed Signal and plot the result.**
+
 The recieved beat signal is further processed by 1D - FFT as below, matlab has an inbuilt function which does all the maths.
 The output is shown, where the peak is clear w.r.t to the range we have initially set and the value is also in the range of +/- 10m
 
-<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/1DFFT.png" width="700" height="400" />
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/1DFFT.png" width="700" height="300" />
 
 The 2D-FFT of Range Doppler Map(RDM) is already implemented , and the result is gotten as below.
 We can nicely gauge we are very close to the output, but one more step on refining this is to be done which is 2d-CFAR
