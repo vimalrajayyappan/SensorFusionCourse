@@ -23,7 +23,7 @@ FMCW ( Frequency Modulated Continuous Wave) for both transmit and recieved signa
 
 The initial target position and constant velocity is set as below.
 
-<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/initialVelocityAndRange.png" width="700" height="400" />
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/initialVelocityAndRange.png" width="700" height="200" />
 
 Next, the range and delay_time is simulated using motion equations as below.
 ## Motion equation 
