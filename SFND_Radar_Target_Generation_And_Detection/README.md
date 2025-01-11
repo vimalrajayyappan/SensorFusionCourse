@@ -9,16 +9,17 @@ Here are the each rubrics in alignment with the same.
 **1 . Using the given system requirements, design a FMCW waveform. Find its Bandwidth (B), chirp time (Tchirp) and slope of the chirp.
 The defined system requirements of radar below:**
 
-<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/WaveEquations.png" width="700" height="400" />
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/RadarSpecifications.png" width="700" height="400" />
+
 
 The calculated Bandwidth(B), Chirp DUration(Tchirp) and slope (S)
- ## Calculated B, T, S
+ <img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/BTS.png" width="700" height="400" />
 
 FMCW ( Frequency Modulated Continuous Wave) for both transmit and recieved signal can be be defined using the wave equations below. 
 
-## Wave equation of FMCW transit and recieve equation
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/WaveEquations.png" width="700" height="400" />
 
-** 2. Simulate Target movement and calculate the beat or mixed signal for every timestamp.
+**2. Simulate Target movement and calculate the beat or mixed signal for every timestamp.**
 
 The initial target position and constant velocity is set as below.
 
