@@ -11,7 +11,7 @@ The defined system requirements of radar below:**
 
 <img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/RadarSpecifications.png" width="700" height="200" />
 
-The calculated Bandwidth(B), Chirp DUration(Tchirp) and slope (S)
+```The calculated Bandwidth(B), Chirp Duration(Tchirp) and slope (S)```
 
 <img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/BTS.png" width="700" height="200" />
 
