@@ -13,7 +13,7 @@ The defined system requirements of radar below:**
 
 
 The calculated Bandwidth(B), Chirp DUration(Tchirp) and slope (S)
- <img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/BTS.png" width="100" height="100" />
+ <img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/BTS.png" width="100" height="50" />
 
 FMCW ( Frequency Modulated Continuous Wave) for both transmit and recieved signal can be be defined using the wave equations below. 
 
