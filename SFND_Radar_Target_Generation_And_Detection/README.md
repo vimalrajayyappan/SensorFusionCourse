@@ -58,6 +58,8 @@ This Training_Cell and Gaurd cell window is slided across the entire RDM to dyna
 
 The following code snippet is CA(CellAveraging)-2DCFAR:
 where, 
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/TrGrInit.png" width="700" height="450" />
+
 - The Tr - Training Cell numbers along Range, Td- Training Cell numbers along Doppler
       Gr - Gaurd Cell numbers along Range, Gd- Gaurd Cell numbers along Doppler are defined
 - Offset value is set
@@ -65,13 +67,19 @@ where,
   Grid Size = (2Tr+2Gr+1)(2Td+2Gd+1).
 - Gaurd Cell region + CUT can be defined by (2Gr+1)(2Gd+1).
 - The Training cells are finally  (2Tr+2Gr+1)(2Td+2Gd+1) - (2Gr+1)(2Gd+1)
+
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/TrGrIterlogic.png" width="700" height="450" />
+
 - Average of Training cells are computed and summed with the offset
 - Each RDM cell signal level is checked against the threshold, if its greater than threshold output is assigned 1 else 0.
 - if we continue for all the possible cells, we will get the final map as below, where the peak is clearly segregated from noise.
 
-## Image of CFAR
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/colourbar.png" width="700" height="450" />
 
-Follwoing is the Contour graph in 2D for easier visualization.
+Follwoing is the Contour graph in 2D for clear focus.
+
+
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/contour.png" width="700" height="450" />
 
 
 
