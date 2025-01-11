@@ -11,7 +11,7 @@ The defined system requirements of radar below:**
 
 <img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/RadarSpecifications.png" width="700" height="200" />
 
-```The calculated Bandwidth(B), Chirp Duration(Tchirp) and slope (S)```
+The calculated Bandwidth(B), Chirp Duration(Tchirp) and slope (S)
 
 <img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/BTS.png" width="700" height="200" />
 
@@ -23,7 +23,7 @@ FMCW ( Frequency Modulated Continuous Wave) for both transmit and recieved signa
 
 The initial target position and constant velocity is set as below.
 
-##Image of initial set values
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/initialVelocityAndRange.png" width="700" height="400" />
 
 Next, the range and delay_time is simulated using motion equations as below.
 ## Motion equation 
