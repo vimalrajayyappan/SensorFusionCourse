@@ -6,8 +6,8 @@ The following picture represents the complete project layout.
 
 Here are the each rubrics in alignment with the same.
 
-** 1 . Using the given system requirements, design a FMCW waveform. Find its Bandwidth (B), chirp time (Tchirp) and slope of the chirp.
-The defined system requirements of radar below: **
+**1 . Using the given system requirements, design a FMCW waveform. Find its Bandwidth (B), chirp time (Tchirp) and slope of the chirp.
+The defined system requirements of radar below:**
 
 <img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/WaveEquations.png" width="700" height="400" />
 
