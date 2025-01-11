@@ -42,7 +42,7 @@ We can nicely gauge we are very close to the output, but one more step on refini
 
 <img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/2DFFT.png" width="700" height="450" />
 
-**Implement the 2D CFAR process on the output of 2D FFT operation, i.e the Range Doppler Map**
+**4.Implement the 2D CFAR process on the output of 2D FFT operation, i.e the Range Doppler Map**
 
 The 2D -CFAR - Constant False Alarm Rate is the technique which helps us in finding Dynamic threshold, that segregates noise from target peaks, considering the homogenous nature of noise around the peaks.
 
