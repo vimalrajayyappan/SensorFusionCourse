@@ -68,13 +68,13 @@ where,
 - Gaurd Cell region + CUT can be defined by (2Gr+1)(2Gd+1).
 - The Training cells are finally  (2Tr+2Gr+1)(2Td+2Gd+1) - (2Gr+1)(2Gd+1)
 
-<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/TrGrIterlogic.png" width="500" height="500" />
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/TrGrIterlogic.png" width="800" height="500" />
 
 - Average of Training cells are computed and summed with the offset
 - Each RDM cell signal level is checked against the threshold, if its greater than threshold output is assigned 1 else 0.
 - if we continue for all the possible cells, we will get the final map as below, where the peak is clearly segregated from noise.
 
-<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/colourbar.png" width="800" height="600" />
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/colourbar.png" width="800" height="400" />
 
 Follwoing is the Contour graph in 2D for clear focus.
 
