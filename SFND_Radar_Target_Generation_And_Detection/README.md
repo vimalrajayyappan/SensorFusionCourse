@@ -26,7 +26,7 @@ The initial target position and constant velocity is set as below.
 <img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/initialVelocityAndRange.png" width="700" height="200" />
 
 Next, the range and delay_time is simulated using motion equations as below.
-## Motion equation 
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/MotionEqn.png" width="700" height="200" />
 
 Using the time stamp and simulated delay time, the Tx and Rx are generated and mixing them both using Tx*.Rx gives us the beat signal , which will be utilised by RangeFFT or 1D-FFT for range measurements
 
