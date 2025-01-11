@@ -79,7 +79,7 @@ where,
 Follwoing is the Contour graph in 2D for clear focus.
 
 
-<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/contour.png" width="700" height="250" />
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Radar_Target_Generation_And_Detection/Images/contour.png" width="700" height="550" />
 
 
 
