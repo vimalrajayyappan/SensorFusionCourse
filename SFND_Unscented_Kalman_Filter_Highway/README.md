@@ -1,76 +1,76 @@
-# SFND_Unscented_Kalman_Filter
-Sensor Fusion UKF Highway Project Starter Code
+# Unscented Kalman Filter(UKF)
+- The answer has to be derived from why EKF is limited and what advantage we have with UKF.
+- The Extended Kalman Filter (EKF) applies a first-order Taylor series linearization to non-linear process and measurement models using Jacobians.This linearization introduces approximation errors, which can degrade estimation accuracy—especially for highly non-linear systems or poor initial estimates.
+- Computing and maintaining Jacobians can be mathematically complex, error-prone, and sometimes infeasible for complex or black-box models.
+- The Unscented Kalman Filter (UKF) avoids explicit linearization. Instead, it uses a deterministic sampling technique called the Unscented Transform, which propagates a set of carefully chosen sigma points through the true non-linear models resulting in better accuracy and robustness than EKF for non-linear systems.
 
-<img src="media/ukf_highway_tracked.gif" width="700" height="400" />
+In this project, we use the **CTRV (Constant Turn Rate and Velocity)** motion model as the **process model** for object state prediction.
+The state is predicted using the CTRV model, and the predicted state is then updated using measurements from multiple sensors:
+- **LiDAR**, which provides **linear position measurements**:  
+  \((p_x, p_y)\)
+- **RADAR**, which provides **non-linear measurements**:  
+  range \((\rho)\), bearing \((\phi)\), and range rate \((\dot{\rho})\)
 
-In this project you will implement an Unscented Kalman Filter to estimate the state of multiple cars on a highway using noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project rubric. 
+A **UKF** framework is used, where the prediction step propagates sigma points through the CTRV process model, and the update step applies the appropriate measurement model depending on the sensor type.
+The UKF project follows the RoadMap below:
+[![UKF_RoadMap](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-The main program can be built and ran by doing the following from the project top directory.
+##### 1.Generate Sigma Points:
+- As per the **CTRV model**, the state vector consists of **5 state elements** \((n_x = 5)\).  
+  A common rule of thumb in UKF is to generate **\(2n_x + 1\)** sigma points to represent the state distribution.
+- Instead of directly propagating the mean and covariance through the non-linear process model—which can distort the Gaussian distribution—the UKF propagates a **set of deterministically chosen sigma points** through the non-linear model.
+- These sigma points are selected such that they **capture the mean and covariance** of the state distribution. After passing through the non-linear process model, the transformed sigma points are used to **reconstruct the predicted mean and covariance**, providing a more accurate approximation of the true distribution.
+- The following formula shows how the sigma points are generated:
+- While generating sigma points, we initially missed incorporating **process noise**.  
+  To account for this, the **state vector is augmented** to include the process noise terms, modeled as **stochastic parameters**.
 
-1. mkdir build
-2. cd build
-3. cmake ..
-4. make
-5. ./ukf_highway
+- In the CTRV model, the process noise consists of:
+  - **Longitudinal (linear) acceleration noise**
+  - **Yaw (angular) acceleration noise**
 
-Note that the programs that need to be written to accomplish the project are src/ukf.cpp, and src/ukf.h
+- By augmenting the original state vector with these noise components, the **augmented state dimension** becomes:
+  \[
+  n_{aug} = 7
+  \]
+- Consequently, the number of sigma points generated is:
+  \[
+  2n_{aug} + 1 = 15
+  \]
+- These **augmented sigma points** are then propagated through the CTRV process model, ensuring that the effects of process noise are properly captured in the predicted mean and covariance.
 
-The program main.cpp has already been filled out, but feel free to modify it.
+##### 2. Predict Sigma Points
+- Each sigma point is propagated through the **non-linear CTRV process model** to obtain the corresponding **predicted sigma points**.
+- During this step, the effects of both the system dynamics and the **process noise** (from the augmented state) are incorporated.
+- Special care is taken to handle edge cases, such as near-zero yaw rate, to ensure numerical stability.
 
-<img src="media/ukf_highway.png" width="700" height="400" />
+##### 3. Predict Mean and Covariance
+- Using the predicted sigma points, the **predicted state mean and covariance** are reconstructed using the associated **UKF weights**.
+- This reconstructed mean and covariance represent the **prior (predicted) state estimate** at the current time step.
+- From this point onward, the predicted mean and covariance are used as the **input for the measurement update step**.
+- 
 
-`main.cpp` is using `highway.h` to create a straight 3 lane highway environment with 3 traffic cars and the main ego car at the center. 
-The viewer scene is centered around the ego car and the coordinate system is relative to the ego car as well. The ego car is green while the 
-other traffic cars are blue. The traffic cars will be accelerating and altering their steering to change lanes. Each of the traffic car's has
-it's own UKF object generated for it, and will update each indidual one during every time step. 
+#### 4. Predict Measurement
+- In the measurement prediction step, the sigma points are propagated through the **measurement model** instead of the process model.
+- To avoid regenerating sigma points, the **predicted sigma points from the process step** are reused directly.
+- Each predicted sigma point is transformed from **state space** into **measurement space** using the appropriate sensor measurement model:
+  - **LiDAR**: linear mapping to \((p_x, p_y)\)
+  - **RADAR**: non-linear mapping to \((\rho, \phi, \dot{\rho})\)
+- The transformed sigma points are then used to compute the **predicted measurement mean and measurement covariance**, which are required for the update step.
+- Angle normalization is applied where necessary (e.g., RADAR bearing) to ensure consistency.
+- There is **no need to augment the state with measurement noise** during the measurement prediction step, unlike in the process prediction.
+- Measurement noise is assumed to be **additive** and **independent** of the state. Therefore, its effect is incorporated by **directly adding the measurement noise covariance matrix** \(R\) to the predicted measurement covariance.
+- This approach simplifies the implementation while remaining mathematically consistent with the UKF formulation.
+- We compute Measurement Mean(Zpred) and Measurement covariance S out of the same,
 
-The red spheres above cars represent the (x,y) lidar detection and the purple lines show the radar measurements with the velocity magnitude along the detected angle. The Z axis is not taken into account for tracking, so you are only tracking along the X/Y axis.
+#### 5. Measurement Update
+- In this step, the **actual sensor measurement** \(z\) is incorporated to correct the predicted state.
+- The **measurement residual** is computed as:
+  \[
+  z - Z_{pred}
+  \]
+- Unlike the standard Kalman Filter, the **Kalman gain** in the UKF is computed using the **cross-correlation matrix** between:
+  - the predicted sigma points in **state space**, and  
+  - the transformed sigma points in **measurement space**.
+- Using this cross-correlation and the measurement covariance, the Kalman gain is computed as per the UKF formulation.
+- The predicted state mean and covariance are then updated using the Kalman gain and the measurement residual, yielding the **posterior state estimate**.[X_ and P_ (Updated state and covaiance)]
 
----
-
-## Other Important Dependencies
-* cmake >= 3.5
-  * All OSes: [click here for installation instructions](https://cmake.org/install/)
-* make >= 4.1 (Linux, Mac), 3.81 (Windows)
-  * Linux: make is installed by default on most Linux distros
-  * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
-  * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
-* gcc/g++ >= 5.4
-  * Linux: gcc / g++ is installed by default on most Linux distros
-  * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
-  * Windows: recommend using [MinGW](http://www.mingw.org/)
- * PCL 1.2
-
-## Basic Build Instructions
-
-1. Clone this repo.
-2. Make a build directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
-4. Run it: `./ukf_highway`
-
-## Editor Settings
-
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
-
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
-
-## Code Style
-
-Please stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html) as much as possible.
-
-## Generating Additional Data
-
-This is optional!
-
-If you'd like to generate your own radar and lidar modify the code in `highway.h` to alter the cars. Also check out `tools.cpp` to
-change how measurements are taken, for instance lidar markers could be the (x,y) center of bounding boxes by scanning the PCD environment
-and performing clustering. This is similar to what was done in Sensor Fusion Lidar Obstacle Detection.
-
-## Project Instructions and Rubric
-
-This information is only accessible by people who are already enrolled in Sensor Fusion. 
-If you are enrolled, see the project page in the classroom
-for instructions and the project rubric.
