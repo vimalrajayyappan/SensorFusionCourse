@@ -1,4 +1,10 @@
+
+
 # Unscented Kalman Filter(UKF)
+![KFGIF](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Unscented_Kalman_Filter_Highway/Pictures/KFGIF.gif)
+
+[Watch Video]([path/to/video.mp4](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Unscented_Kalman_Filter_Highway/Pictures/KalmanFilterProject.mp4))
+
 - The answer has to be derived from why EKF is limited and what advantage we have with UKF.
 - The Extended Kalman Filter (EKF) applies a first-order Taylor series linearization to non-linear process and measurement models using Jacobians.This linearization introduces approximation errors, which can degrade estimation accuracy—especially for highly non-linear systems or poor initial estimates.
 - Computing and maintaining Jacobians can be mathematically complex, error-prone, and sometimes infeasible for complex or black-box models.
@@ -109,6 +115,7 @@ Following are the results of NIS from the project:
 
 ### Radar NIS
 ![RadarNIS](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Unscented_Kalman_Filter_Highway/Pictures/RadarNIS.png)
+
 
 
 
