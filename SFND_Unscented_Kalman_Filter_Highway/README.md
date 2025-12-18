@@ -74,3 +74,19 @@ The UKF project follows the RoadMap below:
 - Using this cross-correlation and the measurement covariance, the Kalman gain is computed as per the UKF formulation.
 - The predicted state mean and covariance are then updated using the Kalman gain and the measurement residual, yielding the **posterior state estimate**.[X_ and P_ (Updated state and covaiance)]
 
+#### 6. Normalized Innovation Squared (NIS)
+- **Normalized Innovation Squared (NIS)** is used as a metric to evaluate the **consistency of the filter**, indicating whether the process and measurement noise have been **overestimated or underestimated**.
+- NIS is computed using the measurement residual and the measurement covariance:
+  #image
+- The computed NIS value is compared against the **Chi-square (\(\chi^2\)) distribution** with degrees of freedom equal to the **measurement dimension**.
+- If the NIS value lies:
+  - **Above** the Chi-square threshold → noise is likely **underestimated**
+  - **Below** the Chi-square threshold → noise is likely **overestimated**
+- By monitoring the NIS over time, we can assess and tune the filter to ensure **statistically consistent estimation performance**.
+- 
+Following are the results of NIS from the project:
+- Laser NIS:
+#image
+- Radar NIS
+- #image
+
