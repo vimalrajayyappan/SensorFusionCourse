@@ -79,7 +79,7 @@ Since we have no ground truth data to verify, taking LiDAR TTC as an initial app
 I have run all the possible detector-descriptor combinations and the results are attached in the spreadsheet. As you can see Detector types _FAST, BRISK and SIFT_
 there are TTC values which really not in the true range. Sometimes the TTCs are in the ranges of (40, 70 and even 90s). Even though _SIFT_ is comparitively better among the
 mentioned 3 detectors, still it shows the values in 20s which is not recommended. 
-<img src="WriteupImages/tableShot.PNG" width="1500" height="500" />
+<img src="WriteupImages/tableshot2.png" width="1500" height="500" />
 
 
 Comparing the rest, _ORB and HARRIS_ detectors, where the results are more erratic, as you can see the values in range of 500s for 10th image in _[ORB-SIFT]_ combination and
