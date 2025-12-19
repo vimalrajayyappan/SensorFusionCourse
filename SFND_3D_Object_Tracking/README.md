@@ -1,3 +1,4 @@
+<img src="WriteupImages/AnimatedGIFS.gif" width="1200" height="300" />
 # SFND 3D Object Tracking:
 
 With the knowledge from previous project on Keypoint Detectors, Descirptors, Matching and knowing how Lidar detection works, we levelled up further
@@ -40,8 +41,20 @@ in the form of map.
 
 The clustering logic for Lidar points is already implemeneted which involves transforming the lidar points to camera frame and group them based on ROI(bounding box) in camera frame. Also there is a shrink factor, which shrinks the grouped lidar points so that the outliers along th eedges which are prone to errors are neglected.
 
-Then the `computeTTCLidar()` function is implemented in `camFusion_Student.cpp`, where I just iterated through Lidar points in both the frames and found the corresponding mean
-value both along X and Y. Computed the relative distance, which is then used to compute TTC. Using only closest point, will pick some outliers impacting TTC result.
+Then the `computeTTCLidar()` function is implemented in `camFusion_Student.cpp`, where from previously I used Mean based Lidar Point selection.
+Now I have utilised IQR based filtering technique which is a robust way of filtering outliers. IQR-based filtering means removing outliers using the Interquartile Range (IQR), a robust statistical method that is much less sensitive to noise and extreme values than mean-based methods. Further I have used the filtered points to generate a median selecting the right points between frames for TTC computation.
+
+- //General fomula of IQR:
+- //Q1 - 25th percentile of sorted array values
+- //Q2- 50th percentile of sorted array values
+- //Q3 - 75th percentile of sorted array values
+- //IQR = Q3-Q1
+- //lowerBound = Q1 - 1.5*IQR
+- //higherBound = Q3 + 1.5*IQR
+
+The points are choosen between these bounds and median is computed. From these x vlaues along the vehicle direction,
+TTC is computed as => 
+- TTC = CurrentDistance*DeltaT/(PreviousDistance - CurrentDistance)
 
 ## FP.3 Associate Keypoint Correspondences with Bounding Boxes
 `clusterKptMatchesWithROI()` method in `camFusion_Student.cpp` is implemented. The logic follows, iterating all the keypoints in the bounding box and compute the euclidean distance with their corresponding matches in previous frame. Those keypoints are choosen, whose distance is approximately 1.2x closer to mean distance.These keypoints are then finalised for median distance ratio calculation for computing TTC.
@@ -55,7 +68,7 @@ value both along X and Y. Computed the relative distance, which is then used to 
 I have attached the TTC calculated by Lidar below. Even though Lidar is a very good sensor, the TTC calculation highly depends on choosing one best point in the point cloud.
 I have seen deviations in the marked cells below. Though they are not too high, but its still need to be taken care. The main reason I found is accompaniying additional filter
 algorithms to choose points that are effective would help reducing this error. Also the mean lidar point which we had computed is no guarntee cant be an outlier.
-<img src="WriteupImages/LidarShot.PNG" width="1000" height="50" />
+<img src="WriteupImages/TTC2.PNG" width="1000" height="50" />
 
 ## FP.6 Performance Evaluation 2
 Since we have no ground truth data to verify, taking LiDAR TTC as an initial approximation to validate against the values generated for image based TTCs.
