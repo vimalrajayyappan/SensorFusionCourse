@@ -49,14 +49,14 @@ The IQR filtering steps involves:
 - //Q1 - 25th percentile of sorted values
 - //Q2- 50th percentile of sorted values
 - //Q3 - 75th percentile of sorted values
-- IQR = Q3-Q1
+- //IQR = Q3-Q1
 - //lowerBound = Q1 - 1.5*IQR
 - //higherBound = Q3 + 1.5*IQR
-The points which lies between the lower and higher bounds are more choosen for median computation.
+- The points which lies between the lower and higher bounds are more choosen for median computation.
 
-After applying IQR filtering, the remaining LiDAR points are used to compute the **median distance** for both the previous and current frames. The median provides a stable and reliable representation of object distance and ensures consistent point selection across consecutive frames.
+After applying IQR filtering, the resulted LiDAR points are used to compute the **median distance** for both the previous and current frames. The median provides a stable and reliable representation of object distance and ensures consistent point selection across consecutive frames.
 Finally, these median distances are used to compute the LiDAR-based TTC using
-TTC = CurrentDistance * DeltaT/(PreviousDistance - CurrentDistance)
+- TTC = CurrentDistance * DeltaT/(PreviousDistance - CurrentDistance)
 
 
 ## FP.3 Associate Keypoint Correspondences with Bounding Boxes
