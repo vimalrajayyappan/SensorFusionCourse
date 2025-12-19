@@ -68,9 +68,11 @@ Finally, these median distances are used to compute the LiDAR-based TTC using
 
 ## FP.5 Performance Evaluation 1:
 
-I have attached the TTC calculated by Lidar below. Even though Lidar is a very good sensor, the TTC calculation highly depends on choosing one best point in the point cloud.
-I have seen deviations in the marked cells below. Though they are not too high, but its still need to be taken care. The main reason I found is accompaniying additional filter
-algorithms to choose points that are effective would help reducing this error. Also the mean lidar point which we had computed is no guarntee cant be an outlier.
+I have attached the TTC calculated by Lidar below. The LiDAR sensor provides accurate and smooth distance measurements, as evidenced by the gradual decrease in object distance over time. However, the TTC estimation is highly sensitive to how a representative point is selected from the LiDAR point cloud.
+Although spatial outliers are reduced through ROI-based clustering, bounding box shrinking, and IQR filtering, the TTC calculation still relies on estimating relative velocity using distance changes observed over a short time interval (0.1 s).
+As the graphs below states gradual decrease in distance, but the fluctuations in TTC is mainly due to the constant velcoity model assumption for entire remaining distance.
+We just look at 0.1s time and calculate the relative velocity based on change in distance, but that velocity is assumed constant for actual current distance between the ego and preceeding vehicles. It is a strong assumption- Lot other factors come into play in real time , may be the ego vehicle can break , or preceeding vehicle can accelerate and move forward in the time. 
+Also the TTC is inversely proportional to change in distance as and when the distance change is small, the TTC will be affected hugely.
 <img src="WriteupImages/TTC2.png" width="1000" height="1500" />
 
 ## FP.6 Performance Evaluation 2
