@@ -1,3 +1,4 @@
+<img src="WriteupImages/AnimatedGIFS.gif" width="1200" height="300" />
 # SFND 3D Object Tracking:
 
 With the knowledge from previous project on Keypoint Detectors, Descirptors, Matching and knowing how Lidar detection works, we levelled up further
@@ -40,8 +41,23 @@ in the form of map.
 
 The clustering logic for Lidar points is already implemeneted which involves transforming the lidar points to camera frame and group them based on ROI(bounding box) in camera frame. Also there is a shrink factor, which shrinks the grouped lidar points so that the outliers along th eedges which are prone to errors are neglected.
 
-Then the `computeTTCLidar()` function is implemented in `camFusion_Student.cpp`, where I just iterated through Lidar points in both the frames and found the corresponding mean
-value both along X and Y. Computed the relative distance, which is then used to compute TTC. Using only closest point, will pick some outliers impacting TTC result.
+The `computeTTCLidar()` function is implemented in **`camFusion_Student.cpp`**. In the initial implementation, a **mean-based LiDAR point selection** approach was used for Time-To-Collision (TTC) estimation, which proved to be highly sensitive to noise and extreme outliers present in LiDAR measurements.
+
+To overcome this limitation, an **Interquartile Range (IQR) based filtering technique** has been introduced. IQR-based filtering is a robust statistical method that removes outliers by analyzing the spread of the data rather than relying on central tendency, making it significantly less sensitive to noise and extreme values.
+The IQR filtering steps involves:
+//General fomula of IQR
+- //Q1 - 25th percentile of sorted values
+- //Q2- 50th percentile of sorted values
+- //Q3 - 75th percentile of sorted values
+- IQR = Q3-Q1
+- //lowerBound = Q1 - 1.5*IQR
+- //higherBound = Q3 + 1.5*IQR
+The points which lies between the lower and higher bounds are more choosen for median computation.
+
+After applying IQR filtering, the remaining LiDAR points are used to compute the **median distance** for both the previous and current frames. The median provides a stable and reliable representation of object distance and ensures consistent point selection across consecutive frames.
+Finally, these median distances are used to compute the LiDAR-based TTC using
+TTC = CurrentDistance * DeltaT/(PreviousDistance - CurrentDistance)
+
 
 ## FP.3 Associate Keypoint Correspondences with Bounding Boxes
 `clusterKptMatchesWithROI()` method in `camFusion_Student.cpp` is implemented. The logic follows, iterating all the keypoints in the bounding box and compute the euclidean distance with their corresponding matches in previous frame. Those keypoints are choosen, whose distance is approximately 1.2x closer to mean distance.These keypoints are then finalised for median distance ratio calculation for computing TTC.
