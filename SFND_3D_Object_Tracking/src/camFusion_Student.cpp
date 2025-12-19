@@ -232,8 +232,107 @@ void computeTTCCamera(std::vector<cv::KeyPoint> &kptsPrev, std::vector<cv::KeyPo
 }
 
 
+
+//IQR Filetering:
+std::vector<double> IQR_Filter(const std::vector<double>& xVals)
+{
+    std::vector<double> filtered;
+    //General fomula of IQR:
+    //Q1 - 25th percentile
+    //Q2- 50th percentile
+    //Q3 - 75th percentile
+    //IQR = Q3-Q1
+    //lowerBound = Q1 - 1.5*IQR
+    //higherBound = Q3 + 1.5*IQR
+    int n = xVals.size();
+    double q1 = xVals[n / 4];
+    double q3 = xVals[(3 * n) / 4];
+    double iqr = q3 - q1;
+
+    double lower = q1 - 1.5 * iqr;
+    double upper = q3 + 1.5 * iqr;
+
+    for (double x : xVals)
+    {
+        if (x >= lower && x <= upper)
+            filtered.push_back(x);
+    }
+    return filtered;
+}
+//IQR-based filtering means removing outliers using the Interquartile Range (IQR), 
+//a robust statistical method that is much less sensitive to noise and extreme values than mean-based methods.
 void computeTTCLidar(std::vector<LidarPoint> &lidarPointsPrev,
-                     std::vector<LidarPoint> &lidarPointsCurr, double frameRate, double &TTC)
+                              std::vector<LidarPoint> &lidarPointsCurr, double frameRate, double &TTC)
+{
+    double dT = 1.0 / frameRate;   // time between frames
+    double laneWidth = 4.0;        // ego lane width
+
+    std::vector<double> prevX, currX;
+
+
+    //Filter Lidar points based on lanewidth 
+    for (auto it = lidarPointsPrev.begin(); it != lidarPointsPrev.end(); ++it)
+    {
+        if (abs(it->y) <= (laneWidth/2.0))
+        {
+            prevX.push_back(it->x);
+        }
+    }
+
+    //Filter Lidar points based on lanewidth 
+    for (auto it = lidarPointsCurr.begin(); it != lidarPointsCurr.end(); ++it)
+    {
+        if (abs(it->y) <= (laneWidth/2.0))
+        {
+             currX.push_back(it->x);
+        }
+    }
+
+    if(prevX.size()>0 && currX.size()>0)
+    {
+        //Sort the X values
+        std::sort(prevX.begin(), prevX.end());
+        std::sort(currX.begin(), currX.end());
+
+        // Applly IQR filter
+        std::vector<double> prevFiltered = IQR_Filter(prevX);
+        std::vector<double> currFiltered = IQR_Filter(currX);
+
+        if(prevFiltered.empty() || currFiltered.empty())
+        {
+            TTC = NAN;
+            return;
+        }
+
+        //Find Median
+        double medPrev = prevFiltered[prevFiltered.size()/2];
+        double medCurr = currFiltered[currFiltered.size()/2];
+
+        if(medPrev <= medCurr)
+        {
+            TTC = NAN;
+            return;
+        }
+
+        TTC = (medCurr*dT)/(medPrev-medCurr);
+        std::cout << "PrevDistance : " << medPrev << std::endl;
+        std::cout << "CurrDistance : " << medCurr << std::endl;
+        std::cout << "dT " << dT << std::endl;
+
+
+    }
+    else //Not needed as in all frames we have detections, jus safety check if we know the relative speed, simply use distance/rel_speed
+    {
+        TTC = NAN;
+    }
+    std::cout <<"TTC Lidar IQR based done : "<< TTC << "s" <<std::endl;
+    
+
+}
+
+//This is previos approach - can be neglected
+void computeTTCLidarMeanBased(std::vector<LidarPoint> &lidarPointsPrev,
+                              std::vector<LidarPoint> &lidarPointsCurr, double frameRate, double &TTC)
 {
     // ...
     double dT = 1.0 / frameRate;    // delta time between two frames in seconds

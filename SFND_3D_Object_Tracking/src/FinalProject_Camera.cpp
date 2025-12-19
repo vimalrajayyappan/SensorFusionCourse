@@ -328,7 +328,7 @@ int main(int argc, const char *argv[])
 
             
 
-            bool bVis = 1;
+            bool bVis = 0;
             if (bVis)
             {
                 cv::Mat matchImg = ((dataBuffer.end() - 1)->cameraImg).clone();
@@ -406,7 +406,7 @@ int main(int argc, const char *argv[])
                     ttcLidarLst.push_back(ttcLidar);
                     ttcCameraLst.push_back(ttcCamera);
 
-                    bVis = 0;
+                    bVis = 1;
                     if (bVis)
                     {
                         cv::Mat visImg = (dataBuffer.end() - 1)->cameraImg.clone();
