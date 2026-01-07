@@ -1,5 +1,5 @@
 # LiDAR Obstacle Detection:
-![OUP1](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/LidarGif.gif)
+![OUP1](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/Lidar2Gif.gif)
 
 ## 1. LiDAR Intro:
 ### 1.1. What is Lidar?
@@ -119,6 +119,6 @@ Once segmentation and clustering are complete, **bounding boxes** are fit around
 Bounding boxes help perception and planning modules track object size, motion, and location in the environment.
 
 ## Final Output
-![OUP2](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/LidarGif.gif)
+![OUP2](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/Lidar2Gif.gif)
 
 
