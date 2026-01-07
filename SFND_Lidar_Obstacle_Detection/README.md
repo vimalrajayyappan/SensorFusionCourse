@@ -15,7 +15,9 @@ A point cloud is a collection of 3D data points that represent the shape and loc
 Each point stores coordinates (x, y, z), and sometimes intensity or color, captured by sensors like LiDAR.
 When combined, these points form a detailed digital model of the real world that algorithms can process to detect obstacles, surfaces, and objects.
 
-![Hessai](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/PCD.png)
+The image below is a map of Pointclouds, stitched using Normalized Distribution Transforms. The circular stuff which you see on the top right of the image is an overhead Water Tank! 
+
+![PCD](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/PCD.png)
 
 ### 1.3. The PCL Library
 The [Point Cloud Library (PCL)](https://pointclouds.org/) is an open-source C++ framework designed for working with 2D/3D point cloud data.
