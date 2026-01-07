@@ -38,7 +38,7 @@ It works reliably in day or night and is widely used alongside cameras and radar
  
 ## 2. Point Cloud Segmentation in Autonomous Vehicles
 
-### 2.1 Why Segment Point Clouds?
+### 2.1. Why Segment Point Clouds?
 Segmentation helps split the 3D point cloud into **meaningful groups**, such as:
 - **Ground vs obstacles**
 - Free space where the car can drive
@@ -46,7 +46,7 @@ Segmentation helps split the 3D point cloud into **meaningful groups**, such as:
 Without segmentation, all points are just raw data.  
 With segmentation, perception systems can classify what is **drivable**, what must be **avoided**, and what objects should be **tracked**.
 
-### 2.2 RANSAC for Ground Plane Segmentation
+### 2.2. RANSAC for Ground Plane Segmentation
 
 #### What is RANSAC?
 RANSAC stands for Random Sample Consensus, and is a method for detecting outliers in data. RANSAC runs for a max number of iterations, and returns the model with the best fit. Each iteration randomly picks a subsample of the data and fits a model through it, such as a line or a plane. Then the iteration with the highest number of inliers or the lowest noise is used as the best model. Here the inliers refers to our points of interest, example the Lidar points on ground while noise or the ones that are non-ground.
@@ -77,7 +77,7 @@ Voxel Grid filtering reduces the number of points by dividing the space into sma
 and replacing all points inside each voxel with a single representative point (usually the centroid).  
 This preserves the overall structure of the environment while **greatly reducing point cloud density** and computation cost.
 
-### 3.1 Euclidean Clustering
+### 3.1. Euclidean Clustering
 Euclidean clustering groups points based on **physical distance**.
 - Points close together are grouped into one cluster
 - Points far apart form separate clusters
@@ -85,8 +85,8 @@ Euclidean clustering groups points based on **physical distance**.
   to the same object”
 This works well for separating obstacles within themselves eg. cars from pedestrians, poles, road signs, etc.
 
-### 3.2 KD-Tree for Fast Search
-A **KD-Tree (K-Dimensional Tree)** is a data structure used to quickly find
+### 3.2. KD-Tree for Fast Search
+A [**KD-Tree (K-Dimensional Tree)**] (https://www.geeksforgeeks.org/dsa/search-and-insertion-in-k-dimensional-tree/) is a data structure used to quickly find
 nearby points in a high-dimensional space.
 - Instead of checking distance to every other point (slow, O(N²)),
   KD-Tree allows efficient neighbor lookups (fast, ~O(N log N))
