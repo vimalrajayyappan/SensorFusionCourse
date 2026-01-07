@@ -28,10 +28,48 @@ It works reliably in day or night and is widely used alongside cameras and radar
     - Can struggle in **rain, fog, or snow**
     - Generates large data → **requires high computing power**
 - Can these disadvantages be reduced?
+    - Regarding cost, there is a clear downward trend in price of LiDARs as below
+    <Image LidarCost>
     - Yes. Many limitations of LiDAR can be reduced through **sensor fusion** — combining LiDAR with cameras, radar, GPS/IMU, and maps.
     - Cameras provide color, texture, and sign/lane understanding
     - Radar performs better in rain, fog, and long range
     - Fusion creates a **more reliable and complete perception** than any single sensor alone
+ 
+## 🧩 Point Cloud Segmentation in Autonomous Vehicles
+
+### ❓ Why Segment Point Clouds?
+Segmentation helps split the 3D point cloud into **meaningful groups**, such as:
+- **Ground vs obstacles**
+- Vehicles, pedestrians, and buildings
+- Free space where the car can drive
+
+Without segmentation, all points are just raw data.  
+With segmentation, perception systems can classify what is **drivable**, what must be **avoided**, and what objects should be **tracked**.
+
+---
+
+## ✳️ RANSAC for Ground Plane Segmentation
+
+### 🔍 What is RANSAC?
+RANSAC (Random Sample Consensus) is an algorithm used to **fit a mathematical model** to noisy data.  
+In LiDAR perception, it is often used to estimate the **ground plane** and separate it from obstacles.
+
+### 🛠️ How RANSAC Works (Step-by-Step)
+1. Randomly select a **small set of points** from the cloud.
+2. Fit a **plane model** through those points.
+3. Count how many points from the cloud **agree with the model** (inliers).
+4. Repeat the process many times with different samples.
+5. Select the model with the **maximum inliers** — that becomes the **best-fit ground plane**.
+6. Remove inlier points (ground), leaving **obstacles** like cars, poles, curbs, and pedestrians.
+
+---
+
+### 🎯 Why RANSAC is Useful
+- Robust against **noise and outliers**
+- Works well even if ground is not perfectly flat
+- Efficient enough for real-time perception
+
+RANSAC is a foundational step before object clustering, tracking, and path planning.
 
 
 
