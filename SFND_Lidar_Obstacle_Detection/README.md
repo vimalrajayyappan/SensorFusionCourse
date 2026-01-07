@@ -3,7 +3,7 @@
 ### 1.1. What is Lidar?
 LiDAR (Light Detection and Ranging) is a remote sensing technology that measures distance by firing rapid laser pulses and timing how long they take to reflect back from objects. By collecting millions of these points per second, LiDAR builds a precise 3D map of the environment.
 It’s widely used in autonomous vehicles for detecting obstacles, road surfaces, and surrounding objects.
-<Image Hesai>
+![alt text](image_url_or_path)
 <Image OSI>
 
 ### 1.2. What is a PointCloud?
@@ -86,44 +86,21 @@ Euclidean clustering groups points based on **physical distance**.
 This works well for separating obstacles within themselves eg. cars from pedestrians, poles, road signs, etc.
 
 ### 3.2. KD-Tree for Fast Search
-A [KD-Tree (K-Dimensional Tree](https://www.geeksforgeeks.org/dsa/search-and-insertion-in-k-dimensional-tree/) is a data structure used to quickly find
+A [KD-Tree (K-Dimensional Tree)](https://www.geeksforgeeks.org/dsa/search-and-insertion-in-k-dimensional-tree/) is a data structure used to quickly find
 nearby points in a high-dimensional space.
 - Instead of checking distance to every other point (slow, O(N²)),
-  KD-Tree allows efficient neighbor lookups (fast, ~O(N log N))
+- KD-Tree allows efficient neighbor lookups (fast, ~O(N log N))
 - PCL uses KD-Tree to speed up Euclidean clustering
 - Without a KD-Tree, clustering on large point clouds would be too slow
   for real-time driving
 
+## 4. Bounding Box Fitting
+Once segmentation and clustering are complete, **bounding boxes** are fit around each detected object cluster.
+- A simple approach uses the cluster’s **minimum and maximum (x, y, z) coordinates** to form an axis-aligned bounding box (AABB).
+- For objects that may not be aligned with the axes (like angled cars), **Principal Component Analysis (PCA)** can be used to find the dominant direction of the points and generate an **oriented bounding box (OBB)**.
+Bounding boxes help perception and planning modules track object size, motion, and location in the environment.
 
+## Final Output
+<GIF>
 
-# Sensor Fusion Self-Driving Car Course
-
-<img src="https://github.com/awbrown90/SensorFusionHighway/blob/master/media/ObstacleDetectionFPS.gif" width="700" height="400" />
-
-### Welcome to the Sensor Fusion course for self-driving cars.
-
-In this course we will be talking about sensor fusion, whch is the process of taking data from multiple sensors and combining it to give us a better understanding of the world around us. we will mostly be focusing on two sensors, lidar, and radar. By the end we will be fusing the data from these two sensors to track multiple cars on the road, estimating their positions and speed.
-
-**Lidar** sensing gives us high resolution data by sending out thousands of laser signals. These lasers bounce off objects, returning to the sensor where we can then determine how far away objects are by timing how long it takes for the signal to return. Also we can tell a little bit about the object that was hit by measuring the intesity of the returned signal. Each laser ray is in the infrared spectrum, and is sent out at many different angles, usually in a 360 degree range. While lidar sensors gives us very high accurate models for the world around us in 3D, they are currently very expensive, upwards of $60,000 for a standard unit.
-
-**Radar** data is typically very sparse and in a limited range, however it can directly tell us how fast an object is moving in a certain direction. This ability makes radars a very pratical sensor for doing things like cruise control where its important to know how fast the car infront of you is traveling. Radar sensors are also very affordable and common now of days in newer cars.
-
-**Sensor Fusion** by combing lidar's high resoultion imaging with radar's ability to measure velocity of objects we can get a better understanding of the sorrounding environment than we could using one of the sensors alone.
-
-
-## Installation
-
-### Linux Ubuntu 16
-
-Install PCL, C++
-
-The link here is very helpful, 
-https://larrylisky.com/2014/03/03/installing-pcl-on-ubuntu/
-
-A few updates to the instructions above were needed.
-
-* libvtk needed to be updated to libvtk6-dev instead of (libvtk5-dev). The linker was having trouble locating libvtk5-dev while building, but this might not be a problem for everyone.
-
-* BUILD_visualization needed to be manually turned on, this link shows you how to do that,
-http://www.pointclouds.org/documentation/tutorials/building_pcl.php
 
