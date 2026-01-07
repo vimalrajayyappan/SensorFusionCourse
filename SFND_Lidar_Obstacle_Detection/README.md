@@ -3,6 +3,10 @@
 ### 1.1. What is Lidar?
 LiDAR (Light Detection and Ranging) is a remote sensing technology that measures distance by firing rapid laser pulses and timing how long they take to reflect back from objects. By collecting millions of these points per second, LiDAR builds a precise 3D map of the environment.
 It’s widely used in autonomous vehicles for detecting obstacles, road surfaces, and surrounding objects.
+Some Lidar OEMs:
+- **Ouster** – OS0 / OS1 / OS2 digital LiDAR series
+- **Hesai** – Pandar, XT, QT series (widely used in RoboTaxis)
+- **Luminar** – Long-range LiDAR for Level 3/4 autonomy
 ![Hessai](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/HessaiLidar.png)
 
 ### 1.2. What is a PointCloud?
