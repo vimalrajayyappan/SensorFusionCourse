@@ -44,7 +44,7 @@ This repo contains multiple projects focused on perception algorithms used in au
   - Nonlinear state estimation using CTRV(Constant Turn Rate Velocity Model) and sigma points approximation
   - Fusion of measurements from multiple sensors (e.g., radar and lidar)  
   - Tracking multiple object position, velocity, and orientation
-  - ![OUP1](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/Lidar2Gif.gif) 
+  - ![KFGIF](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Unscented_Kalman_Filter_Highway/Pictures/KFGIF.gif)
 
 ---
 
