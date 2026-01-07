@@ -1,22 +1,22 @@
 # LiDAR Obstacle Detection:
-### What is Lidar?
+### 1.1 What is Lidar?
 LiDAR (Light Detection and Ranging) is a remote sensing technology that measures distance by firing rapid laser pulses and timing how long they take to reflect back from objects. By collecting millions of these points per second, LiDAR builds a precise 3D map of the environment.
 It’s widely used in autonomous vehicles for detecting obstacles, road surfaces, and surrounding objects.
 <Image Hesai>
 <Image OSI>
 
-### What is a PointCloud?
+### 1.2 What is a PointCloud?
 A point cloud is a collection of 3D data points that represent the shape and location of objects in the environment.
 Each point stores coordinates (x, y, z), and sometimes intensity or color, captured by sensors like LiDAR.
 When combined, these points form a detailed digital model of the real world that algorithms can process to detect obstacles, surfaces, and objects.
 <Image PCD>
 
-### The PCL Library
+### 1.3 The PCL Library
 The [Point Cloud Library (PCL)](https://pointclouds.org/) is an open-source C++ framework designed for working with 2D/3D point cloud data.
 It provides ready-to-use tools for filtering, segmentation, registration, clustering, feature extraction, and visualization of LiDAR data.
 PCL is widely used in robotics, autonomous driving, and perception systems because of its speed, flexibility, and large algorithm collection.
 
-### Why LiDAR fro Autonomous Vehicles
+### 1.4 Why LiDAR fro Autonomous Vehicles
 LiDAR provides high-resolution 3D perception, allowing self-driving cars to precisely measure distance to objects and understand the shape of the environment.
 It works reliably in day or night and is widely used alongside cameras and radar for safe navigation.
 -  Advantages
@@ -35,9 +35,9 @@ It works reliably in day or night and is widely used alongside cameras and radar
     - Radar performs better in rain, fog, and long range
     - Fusion creates a **more reliable and complete perception** than any single sensor alone
  
-## 🧩 Point Cloud Segmentation in Autonomous Vehicles
+## 2. Point Cloud Segmentation in Autonomous Vehicles
 
-### Why Segment Point Clouds?
+### 2.1 Why Segment Point Clouds?
 Segmentation helps split the 3D point cloud into **meaningful groups**, such as:
 - **Ground vs obstacles**
 - Free space where the car can drive
@@ -47,7 +47,7 @@ With segmentation, perception systems can classify what is **drivable**, what mu
 
 ---
 
-### RANSAC for Ground Plane Segmentation
+### 2.2 RANSAC for Ground Plane Segmentation
 
 #### What is RANSAC?
 RANSAC stands for Random Sample Consensus, and is a method for detecting outliers in data. RANSAC runs for a max number of iterations, and returns the model with the best fit. Each iteration randomly picks a subsample of the data and fits a model through it, such as a line or a plane. Then the iteration with the highest number of inliers or the lowest noise is used as the best model. Here the inliers refers to our points of interest, example the Lidar points on ground while noise or the ones that are non-ground.
@@ -59,14 +59,14 @@ Here is a simple GIF on 2D Ransac algorithm working. The red coloured points are
 <Image Ransac overview>
 In LiDAR perception, we need to deal with planes instead of lines as our point cloud dimension is 3D.
 
-### Why RANSAC is Useful
+#### Why RANSAC is Useful
 - Robust against **noise and outliers**
 - Works well even if ground is not perfectly flat, may be afew ups and downs
 - Efficient enough for real-time perception
 RANSAC is a foundational step before object clustering, tracking, and path planning.
 
 
-### Object Clustering in Point Clouds
+## 3. Object Clustering in Point Clouds
 Once the ground is removed, the remaining LiDAR points usually belong to **objects**
 such as cars, pedestrians, barriers, and poles.  
 Object clustering groups nearby points into **individual objects** so that they can
@@ -78,7 +78,7 @@ Voxel Grid filtering reduces the number of points by dividing the space into sma
 and replacing all points inside each voxel with a single representative point (usually the centroid).  
 This preserves the overall structure of the environment while **greatly reducing point cloud density** and computation cost.
 
-#### Euclidean Clustering
+#### 3.1 Euclidean Clustering
 Euclidean clustering groups points based on **physical distance**.
 - Points close together are grouped into one cluster
 - Points far apart form separate clusters
@@ -86,9 +86,7 @@ Euclidean clustering groups points based on **physical distance**.
   to the same object”
 This works well for separating obstacles within themselves eg. cars from pedestrians, poles, road signs, etc.
 
----
-
-#### KD-Tree for Fast Search
+#### 3.2 KD-Tree for Fast Search
 A **KD-Tree (K-Dimensional Tree)** is a data structure used to quickly find
 nearby points in a high-dimensional space.
 
