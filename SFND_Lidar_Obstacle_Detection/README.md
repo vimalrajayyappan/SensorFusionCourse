@@ -1,22 +1,23 @@
 # LiDAR Obstacle Detection:
-### 1.1 What is Lidar?
+## 1. LiDAR Intro:
+### 1.1. What is Lidar?
 LiDAR (Light Detection and Ranging) is a remote sensing technology that measures distance by firing rapid laser pulses and timing how long they take to reflect back from objects. By collecting millions of these points per second, LiDAR builds a precise 3D map of the environment.
 It’s widely used in autonomous vehicles for detecting obstacles, road surfaces, and surrounding objects.
 <Image Hesai>
 <Image OSI>
 
-### 1.2 What is a PointCloud?
+### 1.2. What is a PointCloud?
 A point cloud is a collection of 3D data points that represent the shape and location of objects in the environment.
 Each point stores coordinates (x, y, z), and sometimes intensity or color, captured by sensors like LiDAR.
 When combined, these points form a detailed digital model of the real world that algorithms can process to detect obstacles, surfaces, and objects.
 <Image PCD>
 
-### 1.3 The PCL Library
+### 1.3. The PCL Library
 The [Point Cloud Library (PCL)](https://pointclouds.org/) is an open-source C++ framework designed for working with 2D/3D point cloud data.
 It provides ready-to-use tools for filtering, segmentation, registration, clustering, feature extraction, and visualization of LiDAR data.
 PCL is widely used in robotics, autonomous driving, and perception systems because of its speed, flexibility, and large algorithm collection.
 
-### 1.4 Why LiDAR fro Autonomous Vehicles
+### 1.4. Why LiDAR fro Autonomous Vehicles
 LiDAR provides high-resolution 3D perception, allowing self-driving cars to precisely measure distance to objects and understand the shape of the environment.
 It works reliably in day or night and is widely used alongside cameras and radar for safe navigation.
 -  Advantages
@@ -44,8 +45,6 @@ Segmentation helps split the 3D point cloud into **meaningful groups**, such as:
 
 Without segmentation, all points are just raw data.  
 With segmentation, perception systems can classify what is **drivable**, what must be **avoided**, and what objects should be **tracked**.
-
----
 
 ### 2.2 RANSAC for Ground Plane Segmentation
 
@@ -78,7 +77,7 @@ Voxel Grid filtering reduces the number of points by dividing the space into sma
 and replacing all points inside each voxel with a single representative point (usually the centroid).  
 This preserves the overall structure of the environment while **greatly reducing point cloud density** and computation cost.
 
-#### 3.1 Euclidean Clustering
+### 3.1 Euclidean Clustering
 Euclidean clustering groups points based on **physical distance**.
 - Points close together are grouped into one cluster
 - Points far apart form separate clusters
@@ -86,10 +85,9 @@ Euclidean clustering groups points based on **physical distance**.
   to the same object”
 This works well for separating obstacles within themselves eg. cars from pedestrians, poles, road signs, etc.
 
-#### 3.2 KD-Tree for Fast Search
+### 3.2 KD-Tree for Fast Search
 A **KD-Tree (K-Dimensional Tree)** is a data structure used to quickly find
 nearby points in a high-dimensional space.
-
 - Instead of checking distance to every other point (slow, O(N²)),
   KD-Tree allows efficient neighbor lookups (fast, ~O(N log N))
 - PCL uses KD-Tree to speed up Euclidean clustering
