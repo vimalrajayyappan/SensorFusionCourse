@@ -65,12 +65,12 @@ With segmentation, perception systems can classify what is **drivable**, what mu
 RANSAC stands for Random Sample Consensus, and is a method for detecting outliers in data. RANSAC runs for a max number of iterations, and returns the model with the best fit. Each iteration randomly picks a subsample of the data and fits a model through it, such as a line or a plane. Then the iteration with the highest number of inliers or the lowest noise is used as the best model. Here the inliers refers to our points of interest, example the Lidar points on ground while noise or the ones that are non-ground.
 In LiDAR perception,it is often used to estimate the **ground plane** and separate it from obstacles.
 
-Here is a simple GIF on 2D Ransac algorithm working. The red coloured points are the subsets choosen in every iteration and Green Line is the best fit model for that subset choosen. Here our target is to choose the line/model that fits the most points along the diagonal.
-Ref: Udacity Course.
+Here is a simple GIF on 2D Ransac algorithm working. The red coloured points are the subsets choosen in every iteration and Green Line is the best fit model for that subset choosen. Here our target is to choose the line/model that fits the most points along the diagonal.  
+Ref: Udacity Course.  
 ![RANSAC1](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/ransac-linie-ani.gif)
 
 - In LiDAR perception, we need to deal with planes instead of lines as our point cloud dimension is 3D.
-Ref: Udacity Course
+- Ref: Udacity Course  
 ![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/RansacOverview.png)
 
 
