@@ -1,3 +1,27 @@
+# LiDAR Obstacle Detection:
+### What is Lidar?
+LiDAR (Light Detection and Ranging) is a remote sensing technology that measures distance by firing rapid laser pulses and timing how long they take to reflect back from objects. By collecting millions of these points per second, LiDAR builds a precise 3D map of the environment.
+It’s widely used in autonomous vehicles for detecting obstacles, road surfaces, and surrounding objects.
+<Image Hesai>
+<Image OSI>
+
+### What is a PointCloud?
+A point cloud is a collection of 3D data points that represent the shape and location of objects in the environment.
+Each point stores coordinates (x, y, z), and sometimes intensity or color, captured by sensors like LiDAR.
+When combined, these points form a detailed digital model of the real world that algorithms can process to detect obstacles, surfaces, and objects.
+<Image PCD>
+
+### The PCL Library
+The [Point Cloud Library (PCL)](https://pointclouds.org/) is an open-source C++ framework designed for working with 2D/3D point cloud data.
+It provides ready-to-use tools for filtering, segmentation, registration, clustering, feature extraction, and visualization of LiDAR data.
+PCL is widely used in robotics, autonomous driving, and perception systems because of its speed, flexibility, and large algorithm collection.
+
+
+
+
+
+
+
 # Sensor Fusion Self-Driving Car Course
 
 <img src="https://github.com/awbrown90/SensorFusionHighway/blob/master/media/ObstacleDetectionFPS.gif" width="700" height="400" />
