@@ -10,7 +10,8 @@ This repo contains multiple projects focused on perception algorithms used in au
 - Key algorithms:  
   - Ground plane segmentation using **RANSAC**  
   - Object clustering using **Euclidean clustering** with **KD-Trees**  
-  - Bounding box fitting (axis-aligned and oriented)  
+  - Bounding box fitting (axis-aligned and oriented)
+![OUP1](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/Lidar2Gif.gif) 
 
 ### 2. 2D Camera Feature Tracking  
 - Detects and tracks keypoints across image sequences.  
@@ -18,7 +19,8 @@ This repo contains multiple projects focused on perception algorithms used in au
   - Keypoint detectors: FAST, BRISK, ORB, AKAZE, SIFT, Harris, Shi-Tomasi  
   - Descriptors: BRISK, BRIEF, ORB, FREAK, AKAZE, SIFT  
   - Descriptor matching with Brute Force and FLANN matchers  
-  - Evaluation of detector-descriptor combinations for optimal feature tracking  
+  - Evaluation of detector-descriptor combinations for optimal feature tracking
+<img src="https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_2D_Feature_Matching/Results/FAST_BRIEF.gif" width="1800" height="250" />
 
 ### 3. 3D Object Tracking  
 - Combines 2D camera detection with LiDAR data to track objects in 3D.  
