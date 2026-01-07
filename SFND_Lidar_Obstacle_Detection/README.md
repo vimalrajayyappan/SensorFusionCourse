@@ -37,10 +37,9 @@ It works reliably in day or night and is widely used alongside cameras and radar
  
 ## 🧩 Point Cloud Segmentation in Autonomous Vehicles
 
-### ❓ Why Segment Point Clouds?
+### Why Segment Point Clouds?
 Segmentation helps split the 3D point cloud into **meaningful groups**, such as:
 - **Ground vs obstacles**
-- Vehicles, pedestrians, and buildings
 - Free space where the car can drive
 
 Without segmentation, all points are just raw data.  
@@ -48,31 +47,56 @@ With segmentation, perception systems can classify what is **drivable**, what mu
 
 ---
 
-## ✳️ RANSAC for Ground Plane Segmentation
+### RANSAC for Ground Plane Segmentation
 
-### 🔍 What is RANSAC?
-RANSAC (Random Sample Consensus) is an algorithm used to **fit a mathematical model** to noisy data.  
-In LiDAR perception, it is often used to estimate the **ground plane** and separate it from obstacles.
+#### What is RANSAC?
+RANSAC stands for Random Sample Consensus, and is a method for detecting outliers in data. RANSAC runs for a max number of iterations, and returns the model with the best fit. Each iteration randomly picks a subsample of the data and fits a model through it, such as a line or a plane. Then the iteration with the highest number of inliers or the lowest noise is used as the best model. Here the inliers refers to our points of interest, example the Lidar points on ground while noise or the ones that are non-ground.
+In LiDAR perception,it is often used to estimate the **ground plane** and separate it from obstacles.
 
-### 🛠️ How RANSAC Works (Step-by-Step)
-1. Randomly select a **small set of points** from the cloud.
-2. Fit a **plane model** through those points.
-3. Count how many points from the cloud **agree with the model** (inliers).
-4. Repeat the process many times with different samples.
-5. Select the model with the **maximum inliers** — that becomes the **best-fit ground plane**.
-6. Remove inlier points (ground), leaving **obstacles** like cars, poles, curbs, and pedestrians.
+Here is a simple GIF on 2D Ransac algorithm working. The red coloured points are the subsets choosen in every iteration and Green Line is the best fit model for that subset choosen. Here our target is to choose the line/model that fits the most points along the diagonal.
+< Image ransac-line-ani>
 
----
+<Image Ransac overview>
+In LiDAR perception, we need to deal with planes instead of lines as our point cloud dimension is 3D.
 
-### 🎯 Why RANSAC is Useful
+### Why RANSAC is Useful
 - Robust against **noise and outliers**
-- Works well even if ground is not perfectly flat
+- Works well even if ground is not perfectly flat, may be afew ups and downs
 - Efficient enough for real-time perception
-
 RANSAC is a foundational step before object clustering, tracking, and path planning.
 
 
+### Object Clustering in Point Clouds
+Once the ground is removed, the remaining LiDAR points usually belong to **objects**
+such as cars, pedestrians, barriers, and poles.  
+Object clustering groups nearby points into **individual objects** so that they can
+be classified and tracked.
 
+**Note:** The raw point cloud is first **downsampled and filtered** using the PCL library to reduce noise and data size, since LiDAR produces heavy, high-density data. This improves processing speed and makes segmentation and clustering more efficient. 
+**Example: Voxel Grid Filtering**
+Voxel Grid filtering reduces the number of points by dividing the space into small 3D cubes (voxels)  
+and replacing all points inside each voxel with a single representative point (usually the centroid).  
+This preserves the overall structure of the environment while **greatly reducing point cloud density** and computation cost.
+
+#### Euclidean Clustering
+Euclidean clustering groups points based on **physical distance**.
+- Points close together are grouped into one cluster
+- Points far apart form separate clusters
+- Simple and intuitive — “points that are near each other likely belong
+  to the same object”
+This works well for separating obstacles within themselves eg. cars from pedestrians, poles, road signs, etc.
+
+---
+
+#### KD-Tree for Fast Search
+A **KD-Tree (K-Dimensional Tree)** is a data structure used to quickly find
+nearby points in a high-dimensional space.
+
+- Instead of checking distance to every other point (slow, O(N²)),
+  KD-Tree allows efficient neighbor lookups (fast, ~O(N log N))
+- PCL uses KD-Tree to speed up Euclidean clustering
+- Without a KD-Tree, clustering on large point clouds would be too slow
+  for real-time driving
 
 
 
