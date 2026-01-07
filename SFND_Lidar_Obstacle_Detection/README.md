@@ -67,10 +67,10 @@ In LiDAR perception,it is often used to estimate the **ground plane** and separa
 
 Here is a simple GIF on 2D Ransac algorithm working. The red coloured points are the subsets choosen in every iteration and Green Line is the best fit model for that subset choosen. Here our target is to choose the line/model that fits the most points along the diagonal.
 ![RANSAC1](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/ransac-linie-ani.gif)
-Ref: Udacity Course.
-In LiDAR perception, we need to deal with planes instead of lines as our point cloud dimension is 3D.
+ Ref: Udacity Course.
+- In LiDAR perception, we need to deal with planes instead of lines as our point cloud dimension is 3D.
 ![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/RansacOverview.png)
-Ref: Udacity Course
+ Ref: Udacity Course
 
 #### Why RANSAC is Useful
 - Robust against **noise and outliers**
