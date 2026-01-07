@@ -16,6 +16,22 @@ The [Point Cloud Library (PCL)](https://pointclouds.org/) is an open-source C++ 
 It provides ready-to-use tools for filtering, segmentation, registration, clustering, feature extraction, and visualization of LiDAR data.
 PCL is widely used in robotics, autonomous driving, and perception systems because of its speed, flexibility, and large algorithm collection.
 
+### Why LiDAR fro Autonomous Vehicles
+LiDAR provides high-resolution 3D perception, allowing self-driving cars to precisely measure distance to objects and understand the shape of the environment.
+It works reliably in day or night and is widely used alongside cameras and radar for safe navigation.
+-  Advantages
+    - Provides **high-resolution 3D distance measurements**
+    - Works well **day or night**, independent of lighting conditions
+    - Detects obstacles, road edges, and shapes **with great accuracy**
+- Disadvantages
+    - **More expensive** than camera-based systems
+    - Can struggle in **rain, fog, or snow**
+    - Generates large data → **requires high computing power**
+- Can these disadvantages be reduced?
+    - Yes. Many limitations of LiDAR can be reduced through **sensor fusion** — combining LiDAR with cameras, radar, GPS/IMU, and maps.
+    - Cameras provide color, texture, and sign/lane understanding
+    - Radar performs better in rain, fog, and long range
+    - Fusion creates a **more reliable and complete perception** than any single sensor alone
 
 
 
