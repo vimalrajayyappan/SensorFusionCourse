@@ -20,6 +20,7 @@ When combined, these points form a detailed digital model of the real world that
 The image below is a map of Pointclouds, one of the roads in Banglore, stitched using Normalized Distribution Transforms. The circular object which you see on the top right of the image is an overhead Water Tank! 
 
 ![PCD](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/PCD.png)
+Ref: [My NDT video](https://www.youtube.com/watch?v=Wib59ceL74o)
 
 ### 1.3. The PCL Library
 The [Point Cloud Library (PCL)](https://pointclouds.org/) is an open-source C++ framework designed for working with 2D/3D point cloud data.
@@ -41,6 +42,7 @@ It works reliably in day or night and is widely used alongside cameras and radar
     - Regarding cost, there is a clear downward trend in price of LiDARs as below
       
     ![Cost](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/LidarCost.png)
+    Ref : [Driverless cost gotten low enough!](https://www.01core.com/p/driverless-car-costs-have-gotten)
 
     - Yes. Many limitations of LiDAR can be reduced through **sensor fusion** — combining LiDAR with cameras, radar, GPS/IMU, and maps.
     - Cameras provide color, texture, and sign/lane understanding
@@ -65,8 +67,10 @@ In LiDAR perception,it is often used to estimate the **ground plane** and separa
 
 Here is a simple GIF on 2D Ransac algorithm working. The red coloured points are the subsets choosen in every iteration and Green Line is the best fit model for that subset choosen. Here our target is to choose the line/model that fits the most points along the diagonal.
 ![RANSAC1](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/ransac-linie-ani.gif)
+Ref: Udacity Course
 In LiDAR perception, we need to deal with planes instead of lines as our point cloud dimension is 3D.
 ![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/RansacOverview.png)
+Ref: Udacity Course
 
 #### Why RANSAC is Useful
 - Robust against **noise and outliers**
