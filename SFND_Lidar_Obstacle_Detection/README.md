@@ -3,8 +3,8 @@
 ### 1.1. What is Lidar?
 LiDAR (Light Detection and Ranging) is a remote sensing technology that measures distance by firing rapid laser pulses and timing how long they take to reflect back from objects. By collecting millions of these points per second, LiDAR builds a precise 3D map of the environment.
 It’s widely used in autonomous vehicles for detecting obstacles, road surfaces, and surrounding objects.
-![alt text](image_url_or_path)
-<Image OSI>
+![Hessai](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/HessaiLidar.png)
+![OSI](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/OS128.png)
 
 ### 1.2. What is a PointCloud?
 A point cloud is a collection of 3D data points that represent the shape and location of objects in the environment.
