@@ -1,5 +1,5 @@
 # LiDAR Obstacle Detection:
-![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/LidarGif.gif)
+![OUP1](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/LidarGif.gif)
 
 ## 1. LiDAR Intro:
 ### 1.1. What is Lidar?
@@ -64,7 +64,7 @@ RANSAC stands for Random Sample Consensus, and is a method for detecting outlier
 In LiDAR perception,it is often used to estimate the **ground plane** and separate it from obstacles.
 
 Here is a simple GIF on 2D Ransac algorithm working. The red coloured points are the subsets choosen in every iteration and Green Line is the best fit model for that subset choosen. Here our target is to choose the line/model that fits the most points along the diagonal.
-![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/ransac-line-ani.gif)
+![RANSAC1](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/ransac-linie-ani.gif)
 In LiDAR perception, we need to deal with planes instead of lines as our point cloud dimension is 3D.
 ![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/RansacOverview.png)
 
@@ -111,6 +111,6 @@ Once segmentation and clustering are complete, **bounding boxes** are fit around
 Bounding boxes help perception and planning modules track object size, motion, and location in the environment.
 
 ## Final Output
-![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/LidarGif.gif)
+![OUP2](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/LidarGif.gif)
 
 
