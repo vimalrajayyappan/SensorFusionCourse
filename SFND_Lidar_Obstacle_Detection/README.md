@@ -15,7 +15,7 @@ A point cloud is a collection of 3D data points that represent the shape and loc
 Each point stores coordinates (x, y, z), and sometimes intensity or color, captured by sensors like LiDAR.
 When combined, these points form a detailed digital model of the real world that algorithms can process to detect obstacles, surfaces, and objects.
 
-The image below is a map of Pointclouds, stitched using Normalized Distribution Transforms. The circular stuff which you see on the top right of the image is an overhead Water Tank! 
+The image below is a map of Pointclouds, one of the roads in Banglore, stitched using Normalized Distribution Transforms. The circular object which you see on the top right of the image is an overhead Water Tank! 
 
 ![PCD](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/PCD.png)
 
