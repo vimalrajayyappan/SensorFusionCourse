@@ -86,7 +86,7 @@ Euclidean clustering groups points based on **physical distance**.
 This works well for separating obstacles within themselves eg. cars from pedestrians, poles, road signs, etc.
 
 ### 3.2. KD-Tree for Fast Search
-A [**KD-Tree (K-Dimensional Tree)**] (https://www.geeksforgeeks.org/dsa/search-and-insertion-in-k-dimensional-tree/) is a data structure used to quickly find
+A [KD-Tree (K-Dimensional Tree](https://www.geeksforgeeks.org/dsa/search-and-insertion-in-k-dimensional-tree/) is a data structure used to quickly find
 nearby points in a high-dimensional space.
 - Instead of checking distance to every other point (slow, O(N²)),
   KD-Tree allows efficient neighbor lookups (fast, ~O(N log N))
