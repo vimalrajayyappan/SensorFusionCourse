@@ -7,20 +7,22 @@ Some Lidar OEMs:
 - **Ouster** – OS0 / OS1 / OS2 digital LiDAR series
 - **Hesai** – Pandar, XT, QT series (widely used in RoboTaxis)
 - **Luminar** – Long-range LiDAR for Level 3/4 autonomy
+
 ![Hessai](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/HessaiLidar.png)
 
 ### 1.2. What is a PointCloud?
 A point cloud is a collection of 3D data points that represent the shape and location of objects in the environment.
 Each point stores coordinates (x, y, z), and sometimes intensity or color, captured by sensors like LiDAR.
 When combined, these points form a detailed digital model of the real world that algorithms can process to detect obstacles, surfaces, and objects.
-<Image PCD>
+
+![Hessai](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/PCD.png)
 
 ### 1.3. The PCL Library
 The [Point Cloud Library (PCL)](https://pointclouds.org/) is an open-source C++ framework designed for working with 2D/3D point cloud data.
 It provides ready-to-use tools for filtering, segmentation, registration, clustering, feature extraction, and visualization of LiDAR data.
 PCL is widely used in robotics, autonomous driving, and perception systems because of its speed, flexibility, and large algorithm collection.
 
-### 1.4. Why LiDAR fro Autonomous Vehicles
+### 1.4. Why LiDAR for Autonomous Vehicles
 LiDAR provides high-resolution 3D perception, allowing self-driving cars to precisely measure distance to objects and understand the shape of the environment.
 It works reliably in day or night and is widely used alongside cameras and radar for safe navigation.
 -  Advantages
@@ -56,9 +58,9 @@ RANSAC stands for Random Sample Consensus, and is a method for detecting outlier
 In LiDAR perception,it is often used to estimate the **ground plane** and separate it from obstacles.
 
 Here is a simple GIF on 2D Ransac algorithm working. The red coloured points are the subsets choosen in every iteration and Green Line is the best fit model for that subset choosen. Here our target is to choose the line/model that fits the most points along the diagonal.
-< Image ransac-line-ani>
 
-<Image Ransac overview>
+
+![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/RansacOverview.png)
 In LiDAR perception, we need to deal with planes instead of lines as our point cloud dimension is 3D.
 
 #### Why RANSAC is Useful
