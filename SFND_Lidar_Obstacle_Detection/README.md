@@ -1,4 +1,6 @@
 # LiDAR Obstacle Detection:
+![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/LidarGif.gif)
+
 ## 1. LiDAR Intro:
 ### 1.1. What is Lidar?
 LiDAR (Light Detection and Ranging) is a remote sensing technology that measures distance by firing rapid laser pulses and timing how long they take to reflect back from objects. By collecting millions of these points per second, LiDAR builds a precise 3D map of the environment.
@@ -37,7 +39,9 @@ It works reliably in day or night and is widely used alongside cameras and radar
     - Generates large data → **requires high computing power**
 - Can these disadvantages be reduced?
     - Regarding cost, there is a clear downward trend in price of LiDARs as below
-    <Image LidarCost>
+      
+    ![Cost](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/LidarCost.png)
+
     - Yes. Many limitations of LiDAR can be reduced through **sensor fusion** — combining LiDAR with cameras, radar, GPS/IMU, and maps.
     - Cameras provide color, texture, and sign/lane understanding
     - Radar performs better in rain, fog, and long range
@@ -60,10 +64,9 @@ RANSAC stands for Random Sample Consensus, and is a method for detecting outlier
 In LiDAR perception,it is often used to estimate the **ground plane** and separate it from obstacles.
 
 Here is a simple GIF on 2D Ransac algorithm working. The red coloured points are the subsets choosen in every iteration and Green Line is the best fit model for that subset choosen. Here our target is to choose the line/model that fits the most points along the diagonal.
-
-
-![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/RansacOverview.png)
+![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/ransac-line-ani.gif)
 In LiDAR perception, we need to deal with planes instead of lines as our point cloud dimension is 3D.
+![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/RansacOverview.png)
 
 #### Why RANSAC is Useful
 - Robust against **noise and outliers**
@@ -108,6 +111,6 @@ Once segmentation and clustering are complete, **bounding boxes** are fit around
 Bounding boxes help perception and planning modules track object size, motion, and location in the environment.
 
 ## Final Output
-<GIF>
+![RANSAC](https://github.com/vimalrajayyappan/SensorFusionCourse/blob/main/SFND_Lidar_Obstacle_Detection/LidarGif.gif)
 
 
